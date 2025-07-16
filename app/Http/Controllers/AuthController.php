@@ -22,20 +22,7 @@ class AuthController extends Controller
     public function loged_in(Request $request){
 
         if(Auth::attempt(['email' => $request->email,'password' => $request->password])){
-            if(Auth::check() and Auth::user()->user_role=='user'){
-                return redirect()->route('u.dashboard');
-            }
-            elseif(Auth::check() and Auth::user()->user_role=='editor'){
-                return redirect()->route('e.dashboard');
-            }
-            elseif(Auth::check() and Auth::user()->user_role=='admin'){
-                return redirect()->route('ad.a.dashboard');
-            }
-            elseif(Auth::check() and Auth::user()->user_role=='super_admin'){
-                return redirect()->route('s.a.dashboard');
-            }
-            else{return view('login');}
-
+            return redirect()->route('single.dashboard');
         }
         else{
             return redirect()->back();
@@ -44,13 +31,12 @@ class AuthController extends Controller
 
     //logout
     public function logout(){
-        if(Auth::logout()){
+        if(Auth::check()){
+            Auth::logout();
             return redirect()->route('login');
         }
         else{
            return redirect()->back();
-        }
-        
-        
+        }  
     }
 }

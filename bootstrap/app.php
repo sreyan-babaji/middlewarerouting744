@@ -18,6 +18,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin'=>App\Http\Middleware\AdminCheckMiddleware::class,
             'editor'=>App\Http\Middleware\EditorCheckMiddleware::class,
             'superadmin'=>App\Http\Middleware\SuperAdminCheckMiddleware::class,
+            
+            'user_dashboard'=> App\Http\Middleware\UserMiddleware::class,
+            'editor_dashboard'=> App\Http\Middleware\EditorMiddleware::class,
+            'admin_dashboard'=> App\Http\Middleware\AdminMiddleware::class,
+            'superadmin_dashboard'=> App\Http\Middleware\SuperAdminMiddleware::class,
 
     ]);
     })

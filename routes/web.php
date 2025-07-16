@@ -2,6 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ImgUploadController;
+
+//img upload
+Route::get('img-upload',[ImgUploadController::class,'upload_view'])->name('upload.view');
+Route::post('img-uploaded',[ImgUploadController::class,'uploaded'])->name('uploaded');
+
 
 //all dashboard
 Route::get('/', function () { return view('welcome');})->name('dashboard');
@@ -14,9 +21,9 @@ Route::controller(AuthController::class)->group(function(){
 });
 
 Route::middleware('auth')->group(function(){
+    Route::get('dashboard',[DashboardController::class,'single_dashboard'])->name('single.dashboard');
     //user
     Route::prefix('user')->middleware('user')->group(function(){
-        Route::get('user-dashboard',function(){return view('user_dashboard');})->name('u.dashboard');
         Route::get('user1', function(){return 'user php1';})->name('user1');
         Route::get('user2', function(){return 'user 2';})->name('user2');
         Route::get('user3', function(){return 'user 3';})->name('user3');
@@ -25,7 +32,6 @@ Route::middleware('auth')->group(function(){
 
     //editor
     Route::prefix('editor')->middleware('editor')->group(function(){
-        Route::get('editor-dashboard', function(){ return view('editor_dashboard');})->name('e.dashboard');
         Route::get('editor1', function(){return 'editor 1';})->name('editor1');
         Route::get('editor2', function(){return 'editor 2';})->name('editor2');
         Route::get('editor3', function(){return 'editor 3';})->name('editor3');
@@ -34,7 +40,6 @@ Route::middleware('auth')->group(function(){
 
     //admin
     Route::prefix('admin')->middleware('admin')->name('ad.')->group(function(){
-        Route::get('admin-dashboard', function(){ return view('admin_dashboard');})->name('a.dashboard');
         Route::get('admin1', function(){return 'admin 1';})->name('admin1');
         Route::get('admin2', function(){return 'admin 2';})->name('admin2');
         Route::get('admin3', function(){return 'admin 3';})->name('admin3');
@@ -43,7 +48,7 @@ Route::middleware('auth')->group(function(){
 
     //super admin
     Route::prefix('superadmin')->middleware('superadmin')->group(function(){
-        Route::get('super-admin-dashboard', function(){ return view('super_admin_dashboard');})->name('s.a.dashboard');
+        
         Route::get('superadmin1', function(){return 'superadmin 1';})->name('superadmin1');
         Route::get('superadmin2', function(){return 'superadmin 2';})->name('superadmin2');
         Route::get('superadmin3', function(){return 'superadmin 3';})->name('superadmin3');
@@ -52,7 +57,7 @@ Route::middleware('auth')->group(function(){
 
 });
 
-Route::get('user-dashboard',function(){return'this is user Dashboard';})->name('user_dashboard');
-Route::get('editor-dashboard',function(){return'this is editor Dashboard';})->name('editor_dashboard');
-Route::get('admin-dashboard',function(){return'this is admin Dashboard';})->name('admin_dashboard');
-Route::get('super-admin-dashboard',function(){return'this is super admin Dashboard';})->name('superadmin_dashboard');
+Route::get('user-dashboard',function(){return view('user_dashboard');})->middleware('user_dashboard')->name('u.dashboard');
+Route::middleware('editor_dashboard')->get('editor-dashboard', function(){ return view('editor_dashboard');})->name('e.dashboard');
+Route::middleware('admin_dashboard')->get('admin-dashboard', function(){ return view('admin_dashboard');})->name('a.dashboard');
+Route::middleware('superadmin_dashboard')->get('super-admin-dashboard', function(){ return view('super_admin_dashboard');})->name('s.a.dashboard');
