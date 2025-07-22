@@ -7,7 +7,7 @@ use App\Http\Controllers\ImgUploadController;
 
 //img upload
 Route::get('img-upload',[ImgUploadController::class,'upload_view'])->name('upload.view');
-Route::post('img-uploaded',[ImgUploadController::class,'uploaded'])->name('uploaded');
+Route::post('img-uploaded',[ImgUploadController::class,'uploaded'])->name('uploads');
 
 
 //all dashboard
@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function(){
     Route::get('dashboard',[DashboardController::class,'single_dashboard'])->name('single.dashboard');
     //user
     Route::prefix('user')->middleware('user')->group(function(){
-        Route::get('user1', function(){return 'user php1';})->name('user1');
+        Route::get('user1', function(){return 'user 1';})->name('user1');
         Route::get('user2', function(){return 'user 2';})->name('user2');
         Route::get('user3', function(){return 'user 3';})->name('user3');
         Route::get('user4', function(){return 'user 4';})->name('user4');

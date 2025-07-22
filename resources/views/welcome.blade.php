@@ -10,6 +10,7 @@
 
   <div class="container">
     <h2 class="mb-4 text-center">ইউজার রোল সিলেকশন</h2>
+    <img src="{{ asset('storage/photo/') }}">
     
     <div class="row g-3">
       <!-- User Row -->
