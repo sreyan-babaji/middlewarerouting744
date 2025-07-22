@@ -16,7 +16,7 @@ Route::get('/', function () { return view('welcome');})->name('dashboard');
 //login
 Route::controller(AuthController::class)->group(function(){
     Route::get('login','login_view')->name('login');
-    Route::post('loged-in','loged_in')->name('loged_in');
+    Route::post('loged-in','loged_in')->middleware('throttle:5,60')->name('loged_in');
     Route::get('logout','logout')->middleware('auth')->name('logout');
 });
 

@@ -12,6 +12,7 @@ class DashboardController extends Controller
                 return redirect()->route('u.dashboard');
             }
             elseif(Auth::user()->user_role=='editor'){
+                $dt = new DateTime();
                 return redirect()->route('e.dashboard');
             }
             elseif(Auth::user()->user_role=='admin'){

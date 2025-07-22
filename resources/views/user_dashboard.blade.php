@@ -10,6 +10,7 @@
 <div class="container">
     <div class="row">
         <h1 class="mb-5 text-center"> এটা ইউজার ড্যাশবোর্ড</h1>
+          <h3>{{ session('welcome') }}</h3>
         <div class="fw-bold fs-4 col-4 me-3">
             ইউজার মামুর লিঙ্কগুলো
         </div>
