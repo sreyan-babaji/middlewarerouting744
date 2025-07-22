@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function single_dashboard(){
-        if(Auth::user()->user_role=='user'){
+            if(Auth::user()->user_role=='user'){
                 return redirect()->route('u.dashboard');
             }
             elseif(Auth::user()->user_role=='editor'){

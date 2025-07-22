@@ -7,16 +7,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light p-4">
-
+ <img src="{{ asset('storage/photo/'.$pic->img_url) }}">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card shadow-lg">
           <div class="card-header bg-primary text-white">
+            
             <h4 class="mb-0">ইমেজ আপলোড ফর্ম</h4>
           </div>
           <div class="card-body">
-            <form action="{{route('uploaded')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('uploads')}}" method="POST" enctype="multipart/form-data">
               @csrf
               
               <div class="mb-3">
