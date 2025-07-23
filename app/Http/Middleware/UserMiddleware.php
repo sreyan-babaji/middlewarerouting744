@@ -12,7 +12,7 @@ class UserMiddleware
    
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->user_role == "user"){
+        if(Auth::check() and Auth::user()->user_role == "user"){
             return $next($request);
         }
         else{
