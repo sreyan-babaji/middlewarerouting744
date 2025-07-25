@@ -7,7 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light p-4">
- <img src="{{ asset('storage/photo/'.$pic->img_url) }}">
+ <img src="{{ asset('storage/photo/'.$pic) }}">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">

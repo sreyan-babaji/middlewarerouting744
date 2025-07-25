@@ -9,7 +9,13 @@ use App\Models\Uploads;
 class ImgUploadController extends Controller
 {
     public function upload_view(){
-        $pic=Uploads::first();
+        $pic=Uploads::latest()->first();
+        if(!$pic){
+            $pic='def.png';
+        }
+        else{
+            $pic=$pic->img_url;
+        }
         return view('img_upload',compact('pic'));
     }
     public function uploaded(Request $request){
