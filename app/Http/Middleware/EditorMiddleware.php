@@ -12,7 +12,7 @@ class EditorMiddleware
     
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->user_role=="editor"){
+        if(Auth::check() and Auth::user()->user_role=="editor"){
             return $next($request);
         }
         else{

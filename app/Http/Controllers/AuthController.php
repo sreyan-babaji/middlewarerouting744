@@ -12,9 +12,16 @@ class AuthController extends Controller
 {
     //login view
     public function login_view(){
+        // if(session()->has('log_id')){
+        //     $user_id = session()->get('log_id');
+        //     $user = User::where('id',$user_id);
+        //     if($user){
+        //         Auth::login(user);
+        //     }
+        // }
 
-        if (Cookie::has('user_id')) {
-            $userId = Cookie::get('user_id');
+        if (Cookie::has('login_id')) {
+            $userId = Cookie::get('login_id');
             $user = User::find($userId);
             if ($user) {
                 Auth::login($user);
@@ -29,13 +36,13 @@ class AuthController extends Controller
         }
     }
 
-    //login data fetch
+    //login .data fetch
     public function loged_in(Request $request){
 
         if(Auth::attempt(['email' => $request->email,'password' => $request->password])){
-            Session::put('welcome','welcome to this website');
+            // Session::put('log_id', Auth::user()->id);
 
-            Cookie::queue('user_id', Auth::user()->id, 120);
+            Cookie::queue('login_id', Auth::user()->id, 120);
             
             return redirect()->route('single.dashboard');
         }
@@ -48,7 +55,8 @@ class AuthController extends Controller
     public function logout(){
         if(Auth::check()){
             Auth::logout();
-            return redirect()->route('login');
+
+            return redirect()->route('login')->withoutCookie('login_id');
         }
         else{
            return redirect()->back();

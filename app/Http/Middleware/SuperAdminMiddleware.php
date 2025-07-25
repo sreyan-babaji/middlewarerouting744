@@ -12,7 +12,7 @@ class SuperAdminMiddleware
    
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->user_role=="super_admin"){
+        if(Auth::check() and Auth::user()->user_role=="super_admin"){
             return $next($request);
         }
         else{
